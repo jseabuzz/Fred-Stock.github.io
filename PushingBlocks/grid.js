@@ -87,7 +87,8 @@ function onGridClick(mouseX, mouseY){
     // console.log("---------Click Position-----------")
     // console.log(gridX);
     // console.log(gridY);
-
+    if(blocks == null){blocks = [];}
+    
     if(gridPos[gridY][gridX].clicked()){
         blocks.push(gridPos[gridY][gridX]);
     }
@@ -158,7 +159,7 @@ function undoTilt(){
 
 function redoTilt(){
     if(blocks == null){return;}
-    if(this.futureBlocks.length == 0){return;}
+    if(this.futureBlocks == null || this.futureBlocks.length == 0){return;}
     
     clearGrid();
 
