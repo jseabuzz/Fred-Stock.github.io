@@ -1,6 +1,6 @@
 var x = 100;
 var y = 50;
-var cellSize = 20;
+var cellSize = 23;
 
 var xLeft = x+1;
 var xRight = -1;
@@ -63,7 +63,7 @@ function drawGrid(){
             gridPos[i][j].draw();
         }
     }
-    stroke(0, 255, 0);
+    fill(0);
 
     half = this.cellSize/2;
     //bounding box

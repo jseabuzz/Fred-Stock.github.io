@@ -41,7 +41,7 @@ class Cell{
 
     draw(){
         if(this.active){
-            fill(51);    
+            fill(0, 255, 0);   
         }
         else{
             fill(255);
