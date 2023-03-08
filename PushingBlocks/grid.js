@@ -63,7 +63,8 @@ function drawGrid(){
             gridPos[i][j].draw();
         }
     }
-    fill(0);
+    stroke(255, 0, 0);
+    strokeWeight(2);
 
     half = this.cellSize/2;
     //bounding box
@@ -75,6 +76,8 @@ function drawGrid(){
          xLeft*this.cellSize+half, xBot*this.cellSize-half);
     line(xLeft*this.cellSize+half, xBot*this.cellSize-half,
          xLeft*this.cellSize+half, xTop*this.cellSize+half);
+
+    strokeWeight(1);
 }
 
 function onGridClick(mouseX, mouseY){
