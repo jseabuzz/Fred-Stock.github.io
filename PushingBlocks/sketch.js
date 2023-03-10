@@ -31,6 +31,9 @@ function keyPressed(){
   else if(keyCode === 86){ //V key
     redoTilt();
   }
+  else if(keyCode === 76){ //L key (placeholder)
+    saveGrid();
+  }
   return false;
 }
 

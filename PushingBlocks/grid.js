@@ -178,3 +178,7 @@ function redoTilt(){
 
 }
 
+function saveGrid(){
+    saveCanvas("PushingBlocks", 'png');
+}
+
