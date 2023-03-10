@@ -25,10 +25,10 @@ function keyPressed(){
   else if(keyCode === DOWN_ARROW){
     gridTilt(DOWNK);
   }
-  else if(keyCode === 90){ //Z key
+  else if(keyCode === 90 || BACKSPACE){ //Z key
     undoTilt();
   }
-  else if(keyCode === 86){ //V key
+  else if(keyCode === 86 || ENTER){ //V key
     redoTilt();
   }
   else if(keyCode === 76){ //L key (placeholder)
