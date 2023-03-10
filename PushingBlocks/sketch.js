@@ -25,10 +25,10 @@ function keyPressed(){
   else if(keyCode === DOWN_ARROW){
     gridTilt(DOWNK);
   }
-  else if(keyCode === BACKSPACE){
+  else if(keyCode === 90){
     undoTilt();
   }
-  else if(keyCode === ENTER){
+  else if(keyCode === 86){
     redoTilt();
   }
   return false;
