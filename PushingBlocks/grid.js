@@ -66,16 +66,15 @@ function drawGrid(){
     stroke(255, 0, 0);
     strokeWeight(2);
 
-    half = this.cellSize/2;
     //bounding box
-    line(xLeft*this.cellSize+half, xTop*this.cellSize+half,
-         xRight*this.cellSize-half, xTop*this.cellSize+half);
-    line(xRight*this.cellSize-half, xTop*this.cellSize+half,
-         xRight*this.cellSize-half, xBot*this.cellSize-half);
-    line(xRight*this.cellSize-half, xBot*this.cellSize-half,
-         xLeft*this.cellSize+half, xBot*this.cellSize-half);
-    line(xLeft*this.cellSize+half, xBot*this.cellSize-half,
-         xLeft*this.cellSize+half, xTop*this.cellSize+half);
+    line(xLeft*this.cellSize, xTop*this.cellSize,
+         xRight*this.cellSize, xTop*this.cellSize);
+    line(xRight*this.cellSize, xTop*this.cellSize,
+         xRight*this.cellSize, xBot*this.cellSize);
+    line(xRight*this.cellSize, xBot*this.cellSize,
+         xLeft*this.cellSize, xBot*this.cellSize);
+    line(xLeft*this.cellSize, xBot*this.cellSize,
+         xLeft*this.cellSize, xTop*this.cellSize);
 
     strokeWeight(1);
 }
