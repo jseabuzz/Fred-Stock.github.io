@@ -1,4 +1,4 @@
-var x = 100;
+var x = 50;
 var y = 50;
 var cellSize = 23;
 
@@ -82,7 +82,8 @@ function drawGrid(){
 function onGridClick(mouseX, mouseY){
     gridX = Math.floor(mouseX/this.cellSize);
     gridY = Math.floor(mouseY/this.cellSize);
-    if(gridX >= this.x || gridY >= this.y){
+    if(gridX >= this.x || gridY >= this.y ||
+        gridX < 0 || gridY < 0){
         return;
     }
 
@@ -181,7 +182,43 @@ function redoTilt(){
 
 }
 
-function saveGrid(){
+function saveAsPNG(){
     saveCanvas("PushingBlocks", 'png');
+}
+
+
+//https://stackoverflow.com/questions/3665115/how-to-create-a-file-in-memory-for-user-to-download-but-not-through-server
+function saveAsTxt(){
+    var output = "";
+    for(i = 0; i < blocks.length; i++){
+        output += blocks[i].x + "," + blocks[i].y + ",";
+    }
+
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(output));
+    element.setAttribute('download', "blocks.txt");
+  
+    element.style.display = 'none';
+    document.body.appendChild(element);
+  
+    element.click();
+  
+    document.body.removeChild(element);
+}
+
+function loadFromTxt(){
+    inputString = document.getElementById("blockInput").value;
+    coords = inputString.split(",");
+    console.log(coords);
+    for(i = 0; i < coords.length-1; i+=2){
+        if((tempBlock = gridPos[coords[i]][coords[i+1]]).active === false){
+            tempBlock.active = true;
+            tempBlock.color = 1;
+            this.blocks.push(tempBlock);
+        }
+    }
+    findBBox();
+
+    return false;
 }
 

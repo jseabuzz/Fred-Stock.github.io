@@ -32,9 +32,9 @@ function keyPressed(){
     redoTilt();
   }
   else if(keyCode === 76){ //L key (placeholder)
-    saveGrid();
+    saveAsPNG();
   }
-  return false;
+  // return false;
 }
 
 function draw() {
