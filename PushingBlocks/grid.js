@@ -1,5 +1,5 @@
 var x = 50;
-var y = 50;
+var y = 40;
 var cellSize = 23;
 
 var xLeft = x+1;

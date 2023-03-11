@@ -15,21 +15,27 @@ function mousePressed(){
 function keyPressed(){
   if(keyCode === LEFT_ARROW){
     gridTilt(LEFTK);
+    return false;
   }
   else if(keyCode === RIGHT_ARROW){
     gridTilt(RIGHTK);
+    return false;
   }
   else if(keyCode === UP_ARROW){
     gridTilt(UPK);
+    return false;
   }
   else if(keyCode === DOWN_ARROW){
     gridTilt(DOWNK);
+    return false;
   }
   else if(keyCode === 90){ //Z key
     undoTilt();
+    return false;
   }
   else if(keyCode === 86){ //V key
     redoTilt();
+    return false;
   }
   // return false;
 }
