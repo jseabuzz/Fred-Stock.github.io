@@ -91,12 +91,16 @@ function onGridClick(mouseX, mouseY){
     // console.log(gridY);
     if(blocks == null){blocks = [];}
     
-    if(gridPos[gridY][gridX].clicked()){
-        blocks.push(gridPos[gridY][gridX]);
+    switch(gridPos[gridY][gridX].clicked()){
+        case 0: 
+            blocks.splice(blocks.indexOf(gridPos[gridY][gridX]), 1);
+            break;
+        
+        case 1: 
+            blocks.push(gridPos[gridY][gridX]);
+            break;
     }
-    else{
-        blocks.splice(blocks.indexOf(gridPos[gridY][gridX]), 1);
-    }
+
 
     // console.log("-------Blocks Count--------");
     // console.log(blocks.length);

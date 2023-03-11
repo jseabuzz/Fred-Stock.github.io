@@ -10,6 +10,8 @@ class Cell{
         this.right = null;
         this.top = null;
         this.bot = null;
+
+        this.color = 0;
     }
 
     setNeighbors(left, right, top, bot){
@@ -19,6 +21,9 @@ class Cell{
         this.bot = bot;
     }
 
+    set color(val){
+        this._color = val;
+    }
     set active(val){
         this._active = val;
     }
@@ -29,6 +34,9 @@ class Cell{
         this._y = newY;
     }
 
+    get color(){
+        return this._color;
+    }
     get active(){
         return this._active;
     }
@@ -42,6 +50,18 @@ class Cell{
     draw(){
         if(this.active){
             fill(0, 255, 0);   
+            if(this.color === 1){
+                fill(0, 255, 0);   
+            }
+            if(this.color === 2){
+                fill(0, 0, 255);
+            }
+            if(this.color === 3){
+                fill(255, 0, 255);
+            }
+            if(this.color === 4){
+                fill(100, 200, 255);
+            }
         }
         else{
             fill(255);
@@ -50,8 +70,17 @@ class Cell{
     }
 
     clicked(){
-        this.active = !this.active;
-        return this.active;
+        // this.active = !this.active;
+        console.log(this.color);
+        this.color = this.color + 1;
+        this.color = this.color % 5;
+        console.log(this.color);
+
+
+        console.log(this.active);
+        this.active = !(this.color === 0);
+        console.log(this.active);
+        return this.color;
     }
 
 
@@ -65,24 +94,28 @@ class Cell{
             this.top.transfer(UPK);
             this.active = false;
             this.top.active = true;
+            this.top.color = this.color;
         }
         if(dir === RIGHTK){
             if(this.right == null){return false;}
             this.right.transfer(RIGHTK);
             this.active = false;
             this.right.active = true;
+            this.right.color = this.color;
         }
         if(dir === DOWNK){
             if(this.bot == null){return false;}
             this.bot.transfer(DOWNK);
             this.active = false;
             this.bot.active = true;
+            this.bot.color = this.color;
         }
         if(dir === LEFTK){
             if(this.left == null){return false;}
             this.left.transfer(LEFTK);
             this.active = false;
             this.left.active = true;
+            this.left.color = this.color;
         }
         return true;
     }
