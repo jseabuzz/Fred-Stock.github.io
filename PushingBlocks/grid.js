@@ -150,6 +150,13 @@ function undoTilt(){
 
     clearGrid();
 
+    if(this.prevBlocks == null){
+        this.prevBlocks = [];
+    }
+    if(this.futureBlocks == null){
+        this.futureBlocks = [];
+    }
+
     this.futureBlocks.push(this.prevBlocks.pop());
     this.blocks = [];
     this.blocks = this.prevBlocks.pop();
@@ -187,16 +194,39 @@ function saveAsPNG(){
 }
 
 
-//https://stackoverflow.com/questions/3665115/how-to-create-a-file-in-memory-for-user-to-download-but-not-through-server
 function saveAsTxt(){
     var output = "";
     for(i = 0; i < blocks.length; i++){
         output += blocks[i].x + "," + blocks[i].y + ",";
     }
 
+    dwnldAsTxt("blocks.txt", output);
+
+}
+
+function saveStackAsTxt(){
+
+    output = "";
+    for(i = 0; i < this.prevBlocks.length; i++){
+        output +=("Step: " + i);
+        output +=("\n");
+        
+        for(j = 0; j < (tempBs = this.prevBlocks[i]).length; j++){
+            output += tempBs[j].x + "," + tempBs[j].y + ",";
+        }
+        output +=("\n\n");
+        
+
+    }
+    dwnldAsTxt("block-steps.txt", output);
+}
+
+//https://stackoverflow.com/questions/3665115/how-to-create-a-file-in-memory-for-user-to-download-but-not-through-server
+
+function dwnldAsTxt(filename, text){
     var element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(output));
-    element.setAttribute('download', "blocks.txt");
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
   
     element.style.display = 'none';
     document.body.appendChild(element);
@@ -211,7 +241,10 @@ function loadFromTxt(){
     coords = inputString.split(",");
     console.log(coords);
     for(i = 0; i < coords.length-1; i+=2){
-        if((tempBlock = gridPos[coords[i]][coords[i+1]]).active === false){
+        x1 = parseInt(coords[i]);
+        y1 = parseInt(coords[i+1]);
+        
+        if((tempBlock = gridPos[y1][x1]).active === false){
             tempBlock.active = true;
             tempBlock.color = 1;
             this.blocks.push(tempBlock);
@@ -221,4 +254,5 @@ function loadFromTxt(){
 
     return false;
 }
+
 
