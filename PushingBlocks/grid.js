@@ -95,10 +95,13 @@ function onGridClick(mouseX, mouseY){
     switch(gridPos[gridY][gridX].clicked()){
         case 0: 
             blocks.splice(blocks.indexOf(gridPos[gridY][gridX]), 1);
+            findBBox();
             break;
         
         case 1: 
             blocks.push(gridPos[gridY][gridX]);
+            findBBox();
+            this.futureBlocks = [];
             break;
     }
 
@@ -106,8 +109,6 @@ function onGridClick(mouseX, mouseY){
     // console.log("-------Blocks Count--------");
     // console.log(blocks.length);
 
-    findBBox();
-    this.futureBlocks = [];
 }
 
 //this is gross, revist better if too slow for large configurations
@@ -141,8 +142,9 @@ function findBBox(){
 function clearGrid(){
     for(i = 0; i < blocks.length; i++){
         gridPos[blocks[i].y][blocks[i].x].active = false;
+        gridPos[blocks[i].y][blocks[i].x].color = 0;
+        
     }
-
 }
 
 function undoTilt(){
@@ -165,6 +167,7 @@ function undoTilt(){
 
     for(i = 0; i < blocks.length; i++){
         gridPos[blocks[i].y][blocks[i].x].active = true;
+        gridPos[blocks[i].y][blocks[i].x].color = blocks[i].color;
     }
 
     findBBox();
@@ -239,7 +242,7 @@ function dwnldAsTxt(filename, text){
 function loadFromTxt(){
     inputString = document.getElementById("blockInput").value;
     coords = inputString.split(",");
-    console.log(coords);
+
     for(i = 0; i < coords.length-1; i+=2){
         x1 = parseInt(coords[i]);
         y1 = parseInt(coords[i+1]);

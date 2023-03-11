@@ -25,6 +25,9 @@ class Cell{
         this._color = val;
     }
     set active(val){
+        if(val == false){
+            this.color = 0;
+        }
         this._active = val;
     }
     set x(newX){
@@ -71,15 +74,10 @@ class Cell{
 
     clicked(){
         // this.active = !this.active;
-        console.log(this.color);
         this.color = this.color + 1;
         this.color = this.color % 5;
-        console.log(this.color);
 
-
-        console.log(this.active);
         this.active = !(this.color === 0);
-        console.log(this.active);
         return this.color;
     }
 
@@ -92,30 +90,30 @@ class Cell{
         if(dir === UPK){
             if(this.top == null){return false;}
             this.top.transfer(UPK);
-            this.active = false;
             this.top.active = true;
             this.top.color = this.color;
+            this.active = false;
         }
         if(dir === RIGHTK){
             if(this.right == null){return false;}
             this.right.transfer(RIGHTK);
-            this.active = false;
             this.right.active = true;
             this.right.color = this.color;
+            this.active = false;
         }
         if(dir === DOWNK){
             if(this.bot == null){return false;}
             this.bot.transfer(DOWNK);
-            this.active = false;
             this.bot.active = true;
             this.bot.color = this.color;
+            this.active = false;
         }
         if(dir === LEFTK){
             if(this.left == null){return false;}
             this.left.transfer(LEFTK);
-            this.active = false;
             this.left.active = true;
             this.left.color = this.color;
+            this.active = false;
         }
         return true;
     }
