@@ -5,17 +5,24 @@ canvasH = 600;
 canvasZ = 75;
 twoDtileSize = canvasW/(2*30);
 layer = 0;
+highlight = false;
 
 function ChangeLabel(newString){
-    document.getElementById("stage").textContent = newString;
+    document.getElementById("curLayer").textContent = newString;
 }
 
 function upLayer(){
     layer++;
+    ChangeLabel("Current Layer = " + layer);
 }
 
 function downLayer(){
     layer--;
+    ChangeLabel("Current Layer = " + layer);
+}
+
+function highlightLayer(){
+    highlight = !highlight;
 }
 
 var sketch1 = function(sketch){
@@ -41,7 +48,8 @@ var sketch1 = function(sketch){
     }
     
     sketch.mousePressed = function(){
-        if(sketch.mouseX < canvasW/2 && sketch.mouseY < canvasH){
+        console.log(sketch.mouseY);
+        if(sketch.mouseX < canvasW/2 && sketch.mouseY < canvasH && sketch.mouseY > 0){
             console.log(sketch.mouseX);
             x = math.floor(sketch.mouseX/twoDtileSize);
             y = math.floor(sketch.mouseY/twoDtileSize);
@@ -68,15 +76,12 @@ var sketch2 = function(sketch){
     sketch.draw = function(){
         sketch.background(205, 102, 94);
         sketch.orbitControl();  
-        sketch.translate(100, 100);
-        // sketch.box(100);
-        sketch.translate(-100, -100);
-        threeScreen.draw(sketch);
+        threeScreen.draw(sketch, highlight, layer);
     }
     
     sketch.mousePressed = function(){
         let mX = sketch.mouseX+(canvasW/2);
-        if(mX < canvasW/2 && sketch.mouseY < canvasH){
+        if(mX < canvasW/2 && sketch.mouseY < canvasH && sketch.mouseY > 0){
             x = math.floor(mX/twoDtileSize);
             y = math.floor(sketch.mouseY/twoDtileSize);
             console.log(x + ", " + y);

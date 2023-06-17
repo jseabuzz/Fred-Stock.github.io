@@ -26,7 +26,7 @@ class threeDScreen{
         return false;
     }
 
-    draw(sketch){
+    draw(sketch, highlight, highLayer){
         sketch.fill(255);
         // sketch.background(255);
         sketch.translate(-this.width/2, -this.height/2);
@@ -39,7 +39,11 @@ class threeDScreen{
                                  this.cubes[i].y*this.tileSize, 
                                  this.cubes[i].z*this.tileSize);
 
+            if(highlight && this.cubes[i].z === highLayer){
+                sketch.fill(0, 0, 255);
+            }
             sketch.box(this.tileSize);
+            sketch.fill(255);
 
             // sketch.translate(-this.cubes[i].x*6, -this.cubes[i].y*6, -this.cubes[i].z*6);
             sketch.translate(-this.cubes[i].x*this.tileSize,

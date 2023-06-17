@@ -9,7 +9,7 @@ function setup() {
 }
 
 function mousePressed(){
-  onGridClick(mouseX, mouseY);
+  onGridClick(mouseX  , mouseY);
 }
 
 function keyPressed(){
