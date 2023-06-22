@@ -32,10 +32,8 @@ class twoDScreen{
         sketch.background(255);
         sketch.stroke(0);
         for(let i = 0; i < this.width; i++){
-            for(let j = 0; j < this.height; j++){
-                // console.log("what");
-                sketch.rect(i*this.tileSize, j*this.tileSize, this.tileSize, this.tileSize);
-            }
+            sketch.line(0, i*this.tileSize, this.width, i*this.tileSize);
+            sketch.line(i*this.tileSize, 0, i*this.tileSize, this.height);
         }
 
         sketch.stroke(255);
