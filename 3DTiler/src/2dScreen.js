@@ -38,15 +38,30 @@ class twoDScreen{
 
         sketch.stroke(255);
         for(let i = 0; i < this.cubes.length; i++){
-            if(this.cubes[i].z === this.layer){
-                sketch.fill(0);
-                sketch.rect(
+            
+            switch(this.cubes[i].z){
+                case this.layer:
+                    sketch.fill(0);
+                    sketch.rect(
                         this.cubes[i].x*this.tileSize, 
                         this.cubes[i].y*this.tileSize, 
                         this.tileSize, 
                         this.tileSize);
-                sketch.fill(255);
+                    sketch.fill(255);
+                    break;
+                
+                case this.layer-1:
+                    sketch.fill(166, 166, 166);
+                    sketch.rect(
+                        this.cubes[i].x*this.tileSize, 
+                        this.cubes[i].y*this.tileSize, 
+                        this.tileSize, 
+                        this.tileSize);
+                    sketch.fill(255);
             }
+            // if(this.cubes[i].z === this.layer){
+                
+            // }
         }
     }
 
