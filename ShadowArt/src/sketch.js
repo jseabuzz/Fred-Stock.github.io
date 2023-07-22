@@ -2,6 +2,7 @@ let canvasX = 1000;
 let canvasY = 600;
 let horHeight = canvasY;
 let horWidth = canvasX;
+let gridsize = 10;
 
 let lightsrc;
 
@@ -21,13 +22,23 @@ function setup(){
 function draw(){
     
     clear();
-    line(0, horHeight, canvasX, horHeight);
     if(makingObst){
         push();
         fill(0, 0, 0);
         circle(obstx, obsty, obstr*2);
         pop();
     }
+    
+    push();
+    stroke(211, 211, 211);
+    // console.log(this.canvasX/this.gridsize);
+    for(let i = 0; i < canvasX/gridsize; i++){
+        line(0, i*gridsize, canvasX, i*gridsize);
+        line(i*gridsize, 0, i*gridsize, canvasY);
+    }
+    pop();
+    line(0, horHeight, canvasX, horHeight);
+
     lightsrc.draw();
 }
 
