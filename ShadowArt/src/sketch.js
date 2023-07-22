@@ -44,6 +44,10 @@ function draw(){
 
 function mousePressed(){
     console.log(mouseX + " , " + mouseY);
+    let rMouseX = Math.round(mouseX/gridsize)*gridsize;
+    let rMouseY = Math.round(mouseY/gridsize)*gridsize;
+    console.log(rMouseX + " , " + rMouseY);
+
     if(lightMoving){
         lightMoving = false;
         return;
@@ -55,17 +59,17 @@ function mousePressed(){
     
     if(!makingObst){
         makingObst = true;
-        obstx = mouseX;
-        obsty = mouseY;
+        obstx = rMouseX;
+        obsty = rMouseY;
         console.log(obstx + " , " + obsty);
     }
     else{
         makingObst = false;
-        if(pow(mouseX - obstx, 2) + pow(mouseY - obsty, 2) < ((obstr * obstr))){
+        if(pow(rMouseX - obstx, 2) + pow(rMouseY - obsty, 2) < ((obstr * obstr))){
             lightsrc.addOb(new obstacle(obstx, obsty, -1, -1, horHeight));
         }
         else{
-            lightsrc.addOb(new obstacle(obstx, obsty, mouseX, mouseY, horHeight));
+            lightsrc.addOb(new obstacle(obstx, obsty, mouseX, rMouseY, horHeight));
         }
     }
 
@@ -73,8 +77,11 @@ function mousePressed(){
 }
 
 function mouseMoved(){
+
+    let rMouseX = Math.round(mouseX/gridsize)*gridsize;
+    let rMouseY = Math.round(mouseY/gridsize)*gridsize;
     if(lightMoving){
-        lightsrc.move(mouseX, mouseY);
+        lightsrc.move(rMouseX, rMouseY);
     }
 }
 
