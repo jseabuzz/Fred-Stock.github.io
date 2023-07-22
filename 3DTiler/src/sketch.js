@@ -1,11 +1,34 @@
 // import "convexHull.js"
 
-canvasW = 1000;
-canvasH = 600;
+canvasW = window.screen.width*.99;
+canvasH = window.screen.height*.8;
 canvasZ = 75;
 twoDtileSize = canvasW/(2*30);
 layer = 0;
 highlight = false;
+
+function saveConfig(){
+    var output = "";
+    for(i = 0; i < blocks.length; i++){
+        output += blocks[i].x + "," + blocks[i].y + ",";
+    }
+
+    dwnldAsTxt("3Dtiles.txt", output);
+
+}
+
+function dwnldAsTxt(filename, text){
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+  
+    element.style.display = 'none';
+    document.body.appendChild(element);
+  
+    element.click();
+  
+    document.body.removeChild(element);
+}
 
 function ChangeLabel(newString){
     document.getElementById("curLayer").textContent = newString;
