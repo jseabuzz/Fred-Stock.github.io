@@ -1,12 +1,14 @@
 class light{
 
-    constructor(x, y, horHeight, horWidth){
+    constructor(x, y, horHeight, horWidth, r, g, b){
         this.obs = [];
         this.x = x;
         this.y = y;
         this.horHeight = horHeight;
         this.horWidth = horWidth;
-
+        this.r = r;
+        this.g = g;
+        this.b = b;
         this.rad = 10;
     }
 
@@ -29,7 +31,7 @@ class light{
 
     draw(){
         push();
-        fill(0, 0, 255);
+        fill(this.r, this.g, this.b);
         circle(this.x, this.y, this.rad*2);    
         pop();
         this.obs.forEach(obst => this.drawShadows(obst));
@@ -38,7 +40,7 @@ class light{
 
     drawShadows(obst){
         push();
-        stroke(0, 0, 255);
+        stroke(this.r, this.g, this.b);
         strokeWeight(4);
 
         var ly = abs(obst.y1 - this.y);

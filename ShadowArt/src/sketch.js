@@ -6,7 +6,9 @@ let gridsize = 10;
 
 let lightsrc;
 
-let lightMoving = false;
+let light1Moving = false;
+let light2Moving = false;
+
 let makingObst = false;
 let obstx = -1;
 let obsty = -1;
@@ -14,7 +16,9 @@ let obstr = 5;
 
 function setup(){
     createCanvas(canvasX, canvasY);
-    lightsrc = new light(100, 100, horHeight, horWidth);
+    lightsrc1 = new light(100, 100, horHeight, horWidth, 0, 0, 255);
+    lightsrc2 = new light(700, 100, horHeight, horWidth, 255, 0, 0);
+
     // lightsrc.addOb(new obstacle(500, 500, 600, 550, horHeight));
 }
 
@@ -39,7 +43,9 @@ function draw(){
     pop();
     line(0, horHeight, canvasX, horHeight);
 
-    lightsrc.draw();
+    lightsrc1.draw();
+    lightsrc2.draw();
+
 }
 
 function mousePressed(){
@@ -48,12 +54,21 @@ function mousePressed(){
     let rMouseY = Math.round(mouseY/gridsize)*gridsize;
     console.log(rMouseX + " , " + rMouseY);
 
-    if(lightMoving){
-        lightMoving = false;
+    if(light1Moving){
+        light1Moving = false;
         return;
     }
-    if(lightsrc.clicked(mouseX, mouseY)){ 
-        lightMoving = true;
+    if(lightsrc1.clicked(mouseX, mouseY)){ 
+        light1Moving = true;
+        return; 
+    }
+
+    if(light2Moving){
+        light2Moving = false;
+        return;
+    }
+    if(lightsrc2.clicked(mouseX, mouseY)){ 
+        light2Moving = true;
         return; 
     }
     
@@ -66,10 +81,14 @@ function mousePressed(){
     else{
         makingObst = false;
         if(pow(rMouseX - obstx, 2) + pow(rMouseY - obsty, 2) < ((obstr * obstr))){
-            lightsrc.addOb(new obstacle(obstx, obsty, -1, -1, horHeight));
+            lightsrc1.addOb(new obstacle(obstx, obsty, -1, -1, horHeight));
+            lightsrc2.addOb(new obstacle(obstx, obsty, -1, -1, horHeight));
+
         }
         else{
-            lightsrc.addOb(new obstacle(obstx, obsty, mouseX, rMouseY, horHeight));
+            lightsrc1.addOb(new obstacle(obstx, obsty, mouseX, rMouseY, horHeight));
+            lightsrc2.addOb(new obstacle(obstx, obsty, mouseX, rMouseY, horHeight));
+
         }
     }
 
@@ -80,8 +99,11 @@ function mouseMoved(){
 
     let rMouseX = Math.round(mouseX/gridsize)*gridsize;
     let rMouseY = Math.round(mouseY/gridsize)*gridsize;
-    if(lightMoving){
-        lightsrc.move(rMouseX, rMouseY);
+    if(light1Moving){
+        lightsrc1.move(rMouseX, rMouseY);
+    }
+    if(light2Moving){
+        lightsrc2.move(rMouseX, rMouseY);
     }
 }
 
