@@ -12,9 +12,15 @@ class twoDScreen{
     set layer(value){
         this._layer = value;
     }
+    
     get layer(){
         return this._layer;
     }
+
+    get getCubes(){
+        return this.cubes;
+    }
+
 
     removeCube(x,y,z){
             for(let i = 0; i < this.cubes.length; i++){

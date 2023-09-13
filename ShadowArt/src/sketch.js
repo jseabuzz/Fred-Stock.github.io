@@ -9,6 +9,14 @@ let lightsrc;
 let light1Moving = false;
 let light2Moving = false;
 
+let dBlueShadow = false;
+let dRedShadow = false;
+let dPurpleShadow = false;
+let drawingShadow = false;
+let shadowX = -1;
+let shadows = [];
+let shadowColor = [-1, -1, -1];
+
 let makingObst = false;
 let obstx = -1;
 let obsty = -1;
@@ -33,6 +41,17 @@ function draw(){
         pop();
     }
     
+    if(drawingShadow){
+        push()
+        fill(shadowColor[0], shadowColor[1], shadowColor[2]);
+        circle(shadowX, 0, 2);
+        pop();
+    }
+
+    for(let i = 0; i < shadows.length; i++){
+        shadows[i].draw();
+    }
+
     push();
     stroke(211, 211, 211);
     // console.log(this.canvasX/this.gridsize);
@@ -48,11 +67,65 @@ function draw(){
 
 }
 
+function drawShadow(color){
+    
+    switch(color){
+        case "blue":
+            dBlueShadow = !dBlueShadow;
+
+            //Clear previous button pressess
+            dRedShadow = false;
+            dPurpleShadow = false;
+
+            if(dBlueShadow){
+                shadowColor = [0, 255, 0];
+            }
+        break;
+        case "red":
+            dRedShadow = !dRedShadow;
+
+            //Clear previous button pressess
+            dBlueShadow = false;
+            dPurpleShadow = false;
+
+
+            if(dRedShadow){
+                shadowColor = [0, 255, 255];
+            }
+        break;
+        case "purple":
+            dPurpleShadow = !dPurpleShadow;
+
+            //Clear previous button pressess
+            dBlueShadow = false;
+            dRedShadow = false;
+
+            if(dPurpleShadow){
+                shadowColor = [0, 0, 0];
+            }
+        break;
+        default:
+        break;
+    }
+
+}
+
 function mousePressed(){
     console.log(mouseX + " , " + mouseY);
     let rMouseX = Math.round(mouseX/gridsize)*gridsize;
     let rMouseY = Math.round(mouseY/gridsize)*gridsize;
     console.log(rMouseX + " , " + rMouseY);
+
+    if(dBlueShadow || dRedShadow || dPurpleShadow){
+        if(!drawingShadow){
+            drawingShadow = true;
+            shadowX = rMouseX;
+        }
+        else{
+            drawingShadow = false;
+        } 
+        return;
+    }
 
     if(light1Moving){
         light1Moving = false;
@@ -72,6 +145,7 @@ function mousePressed(){
         return; 
     }
     
+
     if(!makingObst){
         makingObst = true;
         obstx = rMouseX;

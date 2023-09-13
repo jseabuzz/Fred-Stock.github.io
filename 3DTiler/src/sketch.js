@@ -81,6 +81,39 @@ var sketch1 = function(sketch){
             if(!screen.removeCube(x,y,screen.layer)){
                 screen.addCube(new Cube(x,y,screen.layer));
             }
+
+
+            //get new center
+
+            let cubeXs = screen.cubes.map(cube => cube.x);
+            let cubeYs = screen.cubes.map(cube => cube.y);
+            let cubeZs = screen.cubes.map(cube => cube.z);
+
+
+            // console.log(cubeXs);
+            // cX = (Math.max(...cubeXs) - Math.min(...cubeXs))/2 +
+            //         Math.min(...cubeXs);
+
+
+            // cY = (Math.max(...cubeYs) - Math.min(...cubeYs))/2 +
+            //         Math.min(...cubeYs);     
+                    
+            // cZ = (Math.max(...cubeZs) - Math.min(...cubeZs))/2 +
+            //      Math.min(...cubeZs);
+
+            let xSum = cubeXs.reduce((sum, cur) => sum + cur, 0);
+            let ySum = cubeYs.reduce((sum, cur) => sum + cur, 0);
+            let zSum = cubeZs.reduce((sum, cur) => sum + cur, 0);
+
+            let cX = xSum/cubeXs.length;
+            let cY = ySum/cubeYs.length;
+            let cZ = zSum/cubeZs.length;
+
+            if(0 === 1){
+
+                threeDCanv.newCenter(cX, cY, cZ);
+                set3DCenter();
+            }
         }
     }
 }
@@ -92,14 +125,21 @@ var sketch2 = function(sketch){
         canv2 = sketch.createCanvas(canvasW/2, canvasH, sketch.WEBGL);
         canv2.position(canvasW/2, 30);
         threeScreen = new threeDScreen(canvasW/2, canvasH, twoDtileSize/5);
-        
-        // threeScreen = new threeDScreen(canvasW/2, canvasH, twoDtileSize);
+        sketch._center = [0,0,0];
+        console.log(sketch._renderer);
+        console.log("Setup", Object.keys(sketch));
+
+        sketch.createEasyCam();
+
     }
-    
+
+
     sketch.draw = function(){
+        // sketch.orbitControl();
         sketch.background(205, 102, 94);
-        sketch.orbitControl();  
+
         threeScreen.draw(sketch, highlight, layer);
+
     }
     
     sketch.mousePressed = function(){
@@ -113,27 +153,39 @@ var sketch2 = function(sketch){
                 threeScreen.addCube(new Cube(x,y,layer));
             }
         }
+
+
     }
+
 }
 
-new p5(sketch2);
 
-// var upButton = document.getElementById("zUp");
-// var downButton = document.getElementById("zDown");
-//functions for each state
-// function start(){
-//     //#region start
-
-//     //#endregion
-// }
+threeDCanv = new p5(sketch2);
 
 
-// function draw(){
-//     background(205, 102, 94);
-//     // console.log("rotSpeed = " + );
-//     // rotateY( (millis() / 1000)*rotSpeed.value());
-//     orbitControl();
-//     stroke(211, 211, 211);
-//     fill(150, 150, 150);
 
-// }
+//These are obsolete with the easy cam library
+//Keeping them around for posterity though
+threeDCanv.newCenter = (x,y,z) => {
+    threeDCanv.center = [x,y,z];
+    console.log("new 3d center", threeDCanv.center);
+};
+
+function set3DCenter(){
+
+
+    // console.log(threeDCanv.center);
+    threeDCanv.setCameraVal = () => {
+        threeDCanv.camera(
+            0,0, (canvasH/2)/(Math.tan(Math.PI/6)), //eye position default value
+            threeDCanv.center[0]*twoDtileSize,
+            threeDCanv.center[1]*twoDtileSize,
+            threeDCanv.center[2]*twoDtileSize, //center position
+            0, 1, 0 //portion of axis in "up" direction
+             );
+    }
+    threeDCanv.setCameraVal();
+
+}
+
+
