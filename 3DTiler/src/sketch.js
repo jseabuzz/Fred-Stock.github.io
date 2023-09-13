@@ -1,5 +1,5 @@
 // import "convexHull.js"
-
+document.oncontextmenu = () => {return false;}
 canvasW = window.screen.width*.99;
 canvasH = window.screen.height*.8;
 canvasZ = 75;
@@ -122,6 +122,8 @@ new p5(sketch1);
 
 var sketch2 = function(sketch){
     sketch.setup = function() {
+
+
         canv2 = sketch.createCanvas(canvasW/2, canvasH, sketch.WEBGL);
         canv2.position(canvasW/2, 30);
         threeScreen = new threeDScreen(canvasW/2, canvasH, twoDtileSize/5);
