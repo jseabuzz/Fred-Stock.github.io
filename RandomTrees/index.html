@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Traversal</title>
+  <button id="next" onclick="next()">Next</button> 
+  <button id="run" onclick="run()">Run test</button>
+  <a>Number of iterations
+    <input type="number" id="iterations" onchange="onChange()">
+  </a>
+  <a id="step">Step 0</a>
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+    }
+  </style>
+  <script
+  src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+  </script>
+  <script src="p5/p5.js"></script>
+  <!-- <script src="../addons/p5.sound.js"></script> -->
+  <script src="vertex.js"></script>
+  <script src="edge.js"></script>
+  <script src="sketch.js"></script>
+
+</head>
+<script>
+
+  function next(){
+    stop();
+    moveVertex();
+  }
+  function run(){
+    
+    let chart = document.getElementById("myChart");
+    chart.remove();
+    let newChart = document.createElement('canvas');
+    newChart.setAttribute("id", "myChart");
+    document.getElementById("canvDiv").append(newChart);
+    runTest();
+  }
+  function onChange(){
+    let n = document.getElementById("iterations").value;
+    setIterations(n);
+    // setIterations(n);
+  }
+</script>
+
+<body>
+  <main>
+    <div id="canvDiv">
+      <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+    </div>
+    <button id="visual" onclick="runVisual()">Visualize</button>
+    <input id="changeNodes" onchange="changeNodes()">
+  </main>
+</body>
+
+</html>
