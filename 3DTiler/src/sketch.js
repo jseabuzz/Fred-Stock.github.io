@@ -48,10 +48,6 @@ function highlightLayer(){
     highlight = !highlight;
 }
 
-function twoDScreen(){
-    
-}
-
 var sketch1 = function(sketch){
     
     sketch.setup = function(){
