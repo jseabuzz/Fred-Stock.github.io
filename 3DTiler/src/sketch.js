@@ -48,13 +48,13 @@ function highlightLayer(){
     highlight = !highlight;
 }
 
-function twoDScreen(width, height, tilesize){
+//function twoDScreen(width, height, tilesize){
 
-}
+//}
 
-function threeDScreen(width, height, tilesize){
+//function threeDScreen(width, height, tilesize){
 
-}
+//}
 
 var sketch1 = function(sketch){
     
