@@ -1,6 +1,4 @@
 // import "convexHull.js"
-import "2dScreen.js"
-import "3dScreen.js"
 document.oncontextmenu = () => {return false;}
 canvasW = window.screen.width*.99;
 canvasH = window.screen.height*.8;
