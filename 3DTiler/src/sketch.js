@@ -48,7 +48,11 @@ function highlightLayer(){
     highlight = !highlight;
 }
 
-function twoDScreen(){
+function twoDScreen(width, height, tilesize){
+
+}
+
+function threeDScreen(width, height, tilesize){
 
 }
 
